@@ -1,0 +1,24 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Your super  ApplicationAPI",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/welcome": {
+            "get": {
+                "tags": [
+                    "Welcome"
+                ],
+                "summary": "Display Welcome Message",
+                "description": "Display Welcome Message",
+                "operationId": "WelcomeMessage",
+                "responses": {
+                    "200": {
+                        "description": "Welcome Message Fetched"
+                    }
+                }
+            }
+        }
+    }
+}
