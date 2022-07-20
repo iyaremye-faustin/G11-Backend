@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegistrationController;
+use App\Http\Controllers\Api\CommunityController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +17,6 @@ use App\Http\Controllers\Auth\RegistrationController;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
 Route::get('/welcome',[\App\Http\Controllers\Welcome\MessageController::class,'index']);
 Route::post('/register',[RegistrationController::class,'register']);
 
@@ -29,3 +28,8 @@ Route::group(['prefix'=>'role'],function(){
     Route::middleware('auth:sanctum')->get('/',[\App\Http\Controllers\Roles\UserRole::class,'index']);
     Route::middleware('auth:sanctum')->put('assignRole',[\App\Http\Controllers\Roles\UserRole::class,'assignRole']);
 });
+Route::group(['prefix'=>'community'],function(){
+    Route::middleware("auth:sanctum")->post('register',[\App\Http\Controllers\Api\CommunityController::class,'register']);
+});
+
+
