@@ -212,5 +212,6 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
+    'SECRET_KEY' => env('SECRET_KEY', 'SECRET'),
 
 ];
