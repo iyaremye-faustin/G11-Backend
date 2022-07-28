@@ -25,3 +25,7 @@ Route::group(['prefix' => 'user'], function()
 {
     Route::post('/login',[\App\Http\Controllers\Auth\Login::class,'index']);
 });
+Route::group(['prefix'=>'role'],function(){
+    Route::middleware('auth:sanctum')->get('/',[\App\Http\Controllers\Roles\UserRole::class,'index']);
+    Route::middleware('auth:sanctum')->put('assignRole',[\App\Http\Controllers\Roles\UserRole::class,'assignRole']);
+});

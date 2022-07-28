@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class CommunitySeeder extends Seeder
 {
@@ -14,6 +16,8 @@ class CommunitySeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Community::factory()->create(['name'=> 'Drug Abuse']);
+        DB::table('communities')->insert([
+            'name' => Str::random(10),
+        ]);
     }
 }

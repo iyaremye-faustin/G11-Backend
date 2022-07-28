@@ -3,7 +3,7 @@ namespace App\Traits;
 trait ApiResponse{
     protected function successResponse($data,$code)
 	{
-		return response()->json($data,$code);
+		return response()->json(["data"=>$data,"status"=>$code],$code);
 	}
 	protected function errorResponse($message,$code,$errors=[]){
         if($errors){

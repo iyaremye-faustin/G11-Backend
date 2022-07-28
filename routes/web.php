@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return response()->json(['message'=>"Welcome to WeForYouth Application"]);
 });
+Route::get('/api/documentation', function () {
+    return view('swagger.index');
+});

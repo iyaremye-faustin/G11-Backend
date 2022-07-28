@@ -28,7 +28,7 @@ class RegistrationController extends Controller
             'password' => 'required|min:8',
             'age' => 'required|integer',
             'gender' =>  ['required', 'string', Rule::in(['female', 'male'])],
-            'community_id' => 'required|exists:communities,id'
+            'community' => 'required|exists:communities,id'
         ]);
 
         $user = User::create([
@@ -37,7 +37,7 @@ class RegistrationController extends Controller
             'password' => Hash::make($request->password),
             'age' => $request->age,
             'gender' =>  $request->gender,
-            'community_id' => $request->community_id,
+            'community_id' => $request->community,
         ]);
 
         try {
@@ -52,7 +52,7 @@ class RegistrationController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'User registered succesfully, Use Login method to receive token.',
+            'message' => 'Succesfully Registered, Login to continue.',
             'user' => new UserResource($user->refresh()),
         ], 200);
     }
