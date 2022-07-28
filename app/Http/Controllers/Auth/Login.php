@@ -77,7 +77,6 @@ class Login extends ApiController
                             'email'=>$user->email,
                         ),
                         'accessToken'=>$token,
-                        'status'=>200
                     );
                     return $this->successResponse($data,200);
                 }
@@ -85,7 +84,7 @@ class Login extends ApiController
             }
             return $this->errorResponse("User Not Found or Invalid",411,'');
         } catch (\Throwable $th) {
-            return $this->errorResponse("Internal server error",500,'');
+            return $this->errorResponse("Internal server error",500,$th);
         }
     }
 }
