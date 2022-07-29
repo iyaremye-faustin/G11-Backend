@@ -11,7 +11,7 @@ components:
       scheme: bearer
 security:
   - bearerAuth: []
-definitions:        # Schema defination for request body
+definitions:
   users:
     type: object
     required:
@@ -45,8 +45,19 @@ definitions:        # Schema defination for request body
       user:
         type: string
 
+  community:
+    type: object
+    required:
+      - name
+      - description
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+
 paths:
-  /api/register:           # path of your endpoint
+  /api/user/register:           # path of your endpoint
     post:
       tags:               # Tag property
         - User         # Value of the tag
@@ -94,7 +105,48 @@ paths:
               password: password
       responses:
         '200':
-          description: Succefully Assigned Manager To Accomodation
+          description: Successfully logged In
+        '500':
+          description: Internal server error
+        '404':
+          description: Not Found
+        '401':
+          description: Unauthenticated
+        '409':
+          description: Conflict
+        '411':
+          description: Invalid Credentials
+        '422':
+          description: Invalid data in the request
+
+  /api/user/logout:
+    post:
+      tags:
+        - User
+      summary: Logout a user
+      responses:
+        '200':
+          description: Successfully logged out
+        '500':
+          description: Internal server error
+        '404':
+          description: Not Found
+        '401':
+          description: Unauthenticated
+        '409':
+          description: Conflict
+        '411':
+          description: Invalid Credentials
+        '422':
+          description: Invalid data in the request
+  /api/users:
+    get:
+      tags:
+        - User
+      summary: Get all users
+      responses:
+        '200':
+          description: Successfully fetched
         '500':
           description: Internal server error
         '404':
@@ -133,4 +185,53 @@ paths:
         '422':
           description: Invalid data in the request
 
+  /api/user/{user}/role:
+    get:
+      tags:
+        - User
+      summary: Get user role
+      parameters:
+        - in: path
+          name: user
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the user to get the role
+      responses:
+        '200':
+          description: Succefully fetched
+        '500':
+          description: Internal server error
+        '404':
+          description: Not Found
+        '401':
+          description: Unauthenticated
+        '409':
+          description: Conflict
+        '411':
+          description: Invalid Credentials
+        '422':
+          description: Invalid data in the request
 
+  /api/community/register:           # path of your endpoint
+    post:
+      tags:               # Tag property
+        - Community         # Value of the tag
+      summary: Register a community
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/community'
+      responses:
+        '200':
+          description: Community is successfully registered
+        '500':
+          description: Internal server error
+        '403':
+          description: Unauthorized
+        '401':
+          description: Unauthenticated
+        '400':
+          description: Bad request

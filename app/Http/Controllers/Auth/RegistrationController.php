@@ -52,8 +52,7 @@ class RegistrationController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Succesfully Registered, Login to continue.',
-            'user' => new UserResource($user->refresh()),
+            'message' => 'Succesfully Registered, Login to continue.'
         ], 200);
     }
 }

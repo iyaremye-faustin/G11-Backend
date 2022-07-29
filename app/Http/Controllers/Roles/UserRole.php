@@ -15,15 +15,15 @@ class UserRole extends ApiController
 {
     public function index(Request $request)
     {
-        $rules=[
-            'user'=>"required|integer|exists:users,id",
-        ];
-        $validate=Validator::make($request->all(),$rules);
-        if($validate->fails()){
-            $errors=$validate->errors();
-            return $this->errorResponse("Invalid data in the request",422,$errors);
+        $userId=$request->user;
+        if(!$userId){
+            return $this->errorResponse("Invalid data in the request",422,'');
         }
-        $user=User::find($request->user);
+        $user=User::find($userId);
+        if(!$user){
+            $errors=array('message'=>'User is invalid or not found');
+            return $this->errorResponse("Invalid data in the request",404,$errors);
+        }
         $role=Role::where('id',$user->roleId)->first('roleName');
         return $this->successResponse($role,200);
     }

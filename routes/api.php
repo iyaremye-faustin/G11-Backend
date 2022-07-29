@@ -18,18 +18,21 @@ use App\Http\Controllers\Api\CommunityController;
 */
 
 Route::get('/welcome',[\App\Http\Controllers\Welcome\MessageController::class,'index']);
-Route::post('/register',[RegistrationController::class,'register']);
 
 Route::group(['prefix' => 'user'], function()
 {
+    Route::post('/register',[RegistrationController::class,'register']);
+    Route::middleware(['auth:sanctum', 'isAdmin'])->get('/{user}/role',[\App\Http\Controllers\Roles\UserRole::class,'index']);
     Route::post('/login',[\App\Http\Controllers\Auth\Login::class,'index']);
+    Route::middleware('auth:sanctum')->post('/logout',[\App\Http\Controllers\Auth\Logout::class,'logout']);
 });
+
+Route::middleware(['auth:sanctum', 'isAdmin'])->get('/users',[\App\Http\Controllers\Auth\Users::class,'index']);
 Route::group(['prefix'=>'role'],function(){
-    Route::middleware('auth:sanctum')->get('/',[\App\Http\Controllers\Roles\UserRole::class,'index']);
-    Route::middleware('auth:sanctum')->put('assignRole',[\App\Http\Controllers\Roles\UserRole::class,'assignRole']);
+    Route::middleware(['auth:sanctum', 'isAdmin'])->put('assignRole',[\App\Http\Controllers\Roles\UserRole::class,'assignRole']);
 });
 Route::group(['prefix'=>'community'],function(){
-    Route::middleware("auth:sanctum")->post('register',[\App\Http\Controllers\Api\CommunityController::class,'register']);
+    Route::middleware(["auth:sanctum","isAdmin"])->post('register',[\App\Http\Controllers\Api\CommunityController::class,'register']);
 });
 
 
