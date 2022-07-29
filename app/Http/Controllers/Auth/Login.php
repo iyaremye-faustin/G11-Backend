@@ -75,6 +75,9 @@ class Login extends ApiController
                         'user'=>array(
                             'name'=>$user->name,
                             'email'=>$user->email,
+                            'age'=>$user->age,
+                            'role'=>$user->roleId,
+                            'gender'=>$user->gender,
                         ),
                         'accessToken'=>$token,
                     );
