@@ -1,6 +1,7 @@
 <html>
 <head>
     <title>{{ config('app.name') }} | APIs Documentation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swagger-ui-dist@3.20.3/swagger-ui.css">
     <link href="{{asset('swagger/style.css')}}" rel="stylesheet">
 </head>
 <body>
