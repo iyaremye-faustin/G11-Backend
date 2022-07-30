@@ -7,6 +7,7 @@
 <body>
 <div id="swagger-ui"></div>
 {{-- <script src="{{asset('swagger/swagger-bundle.js')}}"></script> --}}
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 </head>
 <body>
 <div id="swagger-ui"></div>
