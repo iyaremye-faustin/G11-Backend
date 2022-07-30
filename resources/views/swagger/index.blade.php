@@ -1,12 +1,14 @@
 <html>
 <head>
     <title>{{ config('app.name') }} | APIs Documentation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swagger-ui-dist@3.20.3/swagger-ui.css">
     <link href="{{asset('swagger/style.css')}}" rel="stylesheet">
 </head>
 <body>
 <div id="swagger-ui"></div>
 <script src="{{asset('swagger/jquery-2.1.4.min.js')}}"></script>
-<script src="{{asset('swagger/swagger-bundle.js')}}"></script>
+{{-- <script src="{{asset('swagger/swagger-bundle.js')}}"></script> --}}
+<script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@3.20.3/swagger-ui-bundle.js"></script>
 <script type="application/javascript">
     const ui = SwaggerUIBundle({
         url: "{{ asset('swagger/swagger.yaml') }}",
