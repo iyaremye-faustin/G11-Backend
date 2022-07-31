@@ -27,7 +27,7 @@ Route::group(['prefix' => 'user'], function()
     Route::middleware('auth:sanctum')->post('/logout',[\App\Http\Controllers\Auth\Logout::class,'logout']);
 });
 
-Route::middleware('isAdmin')->get('/users',[\App\Http\Controllers\Auth\Users::class,'index']);
+Route::get('/users',[\App\Http\Controllers\Auth\Users::class,'index'])->middleware('auth:sanctum');
 Route::group(['prefix'=>'role'],function(){
     Route::middleware(['auth:sanctum', 'isAdmin'])->put('assignRole',[\App\Http\Controllers\Roles\UserRole::class,'assignRole']);
 });
